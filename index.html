@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Mass Animation Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="image-wrapper">
+        <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
+            <img src="admin.jpg" alt="Admin" id="adminImage">
+        </a>
+    </div>
+    <div class="background-blur" id="backgroundBlur"></div>
+    <div class="container" id="formContainer">
+        <h1>Enter Your Credentials</h1>
+        <form id="dataForm">
+            <div class="input-group">
+                <label for="regNo">Registration Number</label>
+                <input type="text" id="regNo" name="regNo" required>
+            </div>
+            <div class="input-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E);" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="not-mobile">
+        <p>This page is only available on mobile view (Portrait).</p>
+    </div>
+    <div id="attendanceContainer" class="attendance-container"></div>
+    <div class="popup-container" id="popupContainer">
+        <div class="popup-content" id="popupContent">
+            <p>This attendance percentage was actually correct according to the attendance sheet that I handle every day with subject staff. However, in the master attendance, the possibility is that you should get an attendance percentage of more than 0.5 to 1% compared to this.</p>
+        </div>
+        <div class="popup-header">
+            <span id="closePopup" onclick="closePopup()">x</span>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
