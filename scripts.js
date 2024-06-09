@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `This attendance percentage was actually correct according to the attendance sheet that I handle every day with subject staff. However, in the master attendance, the possibility is that you should get an attendance percentage of more than 0.5 to 1% compared to this.`
       );
     }, 1000);
-  }, 2000);
+  }, 1000);
 
   closePopupButton.addEventListener("click", closePopup);
   window.addEventListener("click", function (event) {
