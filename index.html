@@ -1,48 +1,788 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>17-karthick-03</title>
     <link
       rel="icon"
       href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRmoocE_3kDllUwV5siGiUdRjTQHul2D2RYPijgWLcpKmndsj-38NyzUmKPfQiHcOG_M3QPwysNrEcl0NtzBXV0-a6U0GHAEY29VBTkfMWDjLPvqc6qLolRHHcf7tJic2COHosVsvT4n5BlfqM9XdhsM92mbBSkd83znRTSICxJHgAH1N3bLA4uGjG-G4/s320/ICON.png"
     />
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(to left, #ff6f61, #6e8b9e);
+        background-size: 200% auto;
+        animation: changeBackgroundColor 5s infinite;
+      }
+
+      .background-blur {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        transition: opacity 2s ease;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .image-wrapper {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
+      }
+
+      #adminImage {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2em;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 2s ease-in-out;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        display: none;
+        position: absolute;
+        z-index: 3;
+      }
+
+      h1 {
+        font-size: 2em;
+        margin-bottom: 1em;
+        color: #333;
+      }
+
+      .input-group {
+        margin-bottom: 1.5em;
+        position: relative;
+      }
+
+      .image-link {
+        outline: none;
+      }
+
+      .image-link img {
+        border: none;
+        outline: none;
+      }
+
+      .image-link:focus {
+        outline: none;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+        color: #666;
+      }
+
+      input {
+        width: calc(100% - 1em);
+        padding: 0.75em;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #2575fc;
+        box-shadow: 0 0 8px rgba(37, 117, 252, 0.3);
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 0.75em;
+        background: #2575fc;
+        border: none;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      button:hover {
+        background: #6a11cb;
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        background: #4e0aaf;
+      }
+
+      .not-mobile {
+        margin-top: 150%;
+        width: 100%;
+        text-align: center;
+        font-size: 0.5em;
+        color: white;
+      }
+
+      .not-mobile p {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 1em;
+        border-radius: 10px;
+      }
+
+      .popup-header {
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        cursor: pointer;
+        color: #fff;
+      }
+
+      .popup-header span {
+        font-size: 20px;
+      }
+
+      .popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .popup-content {
+        background: #fff;
+        padding: 20px;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .popup-content button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #2575fc;
+        border: none;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .popup-content button:hover {
+        background: #6a11cb;
+      }
+
+      #viewAttendanceBtn {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      @media (min-width: 768px) {
+        body {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="image-wrapper">
-        <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
-            <img src="admin.jpg" alt="Admin" id="adminImage">
-        </a>
+      <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
+        <img src="admin.jpg" alt="Admin" id="adminImage" />
+      </a>
     </div>
     <div class="background-blur" id="backgroundBlur"></div>
     <div class="container" id="formContainer">
-        <h1>Enter Your Credentials</h1>
-        <form id="dataForm">
-            <div class="input-group">
-                <label for="regNo">Registration Number</label>
-                <input type="text" id="regNo" name="regNo" required>
-            </div>
-            <div class="input-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required>
-            </div>
-            <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E);" type="submit">Submit</button>
-        </form>
+      <h1>Enter Your Credentials</h1>
+      <form id="dataForm">
+        <div class="input-group">
+          <label for="regNo">Registration Number</label>
+          <input type="text" id="regNo" name="regNo" required />
+        </div>
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <button
+          style="background: linear-gradient(to right, #ff6f61, #6e8b9e)"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
     </div>
     <div class="not-mobile">
-        <p>This page is only available on mobile view (Portrait).</p>
+      <p>This page is only available on mobile view (Portrait).</p>
     </div>
     <div id="attendanceContainer" class="attendance-container"></div>
     <div class="popup-container" id="popupContainer">
-        <div class="popup-content" id="popupContent">
-            <p>This attendance percentage was actually correct according to the attendance sheet that I handle every day with subject staff. However, in the master attendance, the possibility is that you should get an attendance percentage of more than 0.5 to 1% compared to this.</p>
-        </div>
-        <div class="popup-header">
-            <span id="closePopup" onclick="closePopup()">x</span>
-        </div>
+      <div class="popup-content" id="popupContent">
+        <p>
+          This attendance percentage was actually correct according to the
+          attendance sheet that I handle every day with subject staff. However,
+          in the master attendance, the possibility is that you should get an
+          attendance percentage of more than 0.5 to 1% compared to this.
+        </p>
+      </div>
+      <div class="popup-header">
+        <span id="closePopup" onclick="closePopup()">x</span>
+      </div>
     </div>
-    <script src="scripts.js"></script>
-</body>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const popupContainer = document.getElementById("popupContainer");
+        const popupContent = document.getElementById("popupContent");
+        const backgroundBlur = document.getElementById("backgroundBlur");
+        const container = document.getElementById("formContainer");
+        const closePopupButton = document.getElementById("closePopup");
+        const dataForm = document.getElementById("dataForm");
+
+        backgroundBlur.style.opacity = "0.8";
+        setTimeout(() => {
+          backgroundBlur.style.opacity = "0";
+          container.style.display = "block";
+          setTimeout(() => {
+            showPopup(
+              `This attendance percentage was actually correct according to the attendance sheet that I handle every day with subject staff. However, in the master attendance, the possibility is that you should get an attendance percentage of more than 0.5 to 1% compared to this.`
+            );
+          }, 500);
+        }, 500);
+
+        closePopupButton.addEventListener("click", closePopup);
+        window.addEventListener("click", function (event) {
+          if (event.target === popupContainer) {
+            closePopup();
+          }
+        });
+
+        dataForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const regNo = document.getElementById("regNo").value;
+          const dob = document.getElementById("dob").value;
+          if (validateInput(regNo, dob)) {
+            fetchAttendanceData(regNo, dob)
+              .then((data) => {
+                const attendancePercentage = calculateAttendancePercentage(
+                  data.attend,
+                  data.total_number
+                );
+                showPopup(
+                  `Dear ${
+                    data.name
+                  },<br>Your attendance percentage is ${attendancePercentage.toFixed(
+                    2
+                  )}% (${attendancePercentage.toFixed(0)}%).`
+                );
+              })
+              .catch((error) => {
+                console.error("Error fetching attendance data:", error);
+                alert("Error fetching attendance data. Please try again.");
+              });
+          } else {
+            alert("Please fill in all fields with valid data.");
+          }
+        });
+
+        function closePopup() {
+          popupContainer.style.display = "none";
+        }
+
+        function showPopup(message) {
+          popupContent.innerHTML = `<p>${message}</p>`;
+          popupContainer.style.display = "flex";
+        }
+
+        function validateInput(regNo, dob) {
+          return regNo && dob && !isNaN(regNo);
+        }
+
+        function calculateAttendancePercentage(attend, totalNumber) {
+          return (attend / totalNumber) * 100;
+        }
+
+        function fetchAttendanceData(regNo, dob) {
+          const users = [
+            {
+              regNo: "142222104061",
+              dob: "2004-10-08",
+              name: "HEMNATH N",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104062",
+              dob: "2003-10-04",
+              name: "JAHANKUMAR B",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104063",
+              dob: "2005-06-25",
+              name: "JANANI R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104064",
+              dob: "2004-08-27",
+              name: "JAYACHANDRAN S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104065",
+              dob: "2004-01-26",
+              name: "JAYAM ARUN VIKRAM S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104066",
+              dob: "2005-03-07",
+              name: "JAYAPRIYA B",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104067",
+              dob: "2004-08-28",
+              name: "JAYASHRUDHI S D",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104068",
+              dob: "2005-04-03",
+              name: "JEEVANANTHAM B",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104069",
+              dob: "2005-06-24",
+              name: "JEEVARAJ S P",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104070",
+              dob: "2005-06-24",
+              name: "JESHWA S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104071",
+              dob: "2004-08-01",
+              name: "JOTHI PRAKASH N",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104072",
+              dob: "2005-06-25",
+              name: "KABILAN R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104073",
+              dob: "2005-03-17",
+              name: "KARTHICK S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104074",
+              dob: "2005-03-08",
+              name: "KARTHIK S G",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104075",
+              dob: "2005-03-17",
+              name: "KARTHIKEYAN D",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104076",
+              dob: "2004-12-08",
+              name: "KATHEEB ANSARI",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104077",
+              dob: "2005-02-19",
+              name: "KAVEEYA M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104078",
+              dob: "2004-12-15",
+              name: "KAVIYA S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104079",
+              dob: "2004-12-25",
+              name: "KAVYAA K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104080",
+              dob: "2005-04-03",
+              name: "KISHORE M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104081",
+              dob: "2005-05-02",
+              name: "KISHORE M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104082",
+              dob: "2004-11-25",
+              name: "LATCHIYASRI K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104083",
+              dob: "2004-01-30",
+              name: "LINGEESHWAR T S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104084",
+              dob: "2004-09-03",
+              name: "LOGESHWARAN S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104085",
+              dob: "2004-06-14",
+              name: "LOKESH SUNDAR R U",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104086",
+              dob: "2005-09-21",
+              name: "MADHESH KUMAR S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104087",
+              dob: "2004-09-13",
+              name: "MADHUMITHA S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104088",
+              dob: "2004-09-12",
+              name: "MANOJ R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104089",
+              dob: "2004-05-06",
+              name: "MAARISHWARAN S V",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104090",
+              dob: "2005-06-23",
+              name: "MEITHAVAM T",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104091",
+              dob: "2004-09-14",
+              name: "MOHAMED HARUN RAZEED T",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104092",
+              dob: "2004-08-17",
+              name: "MONIKA S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104093",
+              dob: "2005-02-23",
+              name: "MUKESHH R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104094",
+              dob: "2005-07-10",
+              name: "MUKESH KUMAR B",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104095",
+              dob: "2005-09-30",
+              name: "MURALI KRISHNA L K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104096",
+              dob: "2004-10-04",
+              name: "MURUGANUMOORTHY KUM S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104097",
+              dob: "2004-04-09",
+              name: "NAVEEN S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104098",
+              dob: "2005-10-08",
+              name: "NAVEEN KUMAR S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104099",
+              dob: "2003-06-13",
+              name: "NIKHIL B",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104100",
+              dob: "2004-11-14",
+              name: "NISHA M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104101",
+              dob: "2004-09-20",
+              name: "NITHISH KANNA P",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104102",
+              dob: "2004-12-13",
+              name: "PAVITHRA A",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104103",
+              dob: "2003-11-01",
+              name: "PAVITHRA K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104104",
+              dob: "2004-11-17",
+              name: "PONKIRRUTHICK K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104105",
+              dob: "2005-04-22",
+              name: "POORNIMA S M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104106",
+              dob: "2004-06-25",
+              name: "PRANAV R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104107",
+              dob: "2004-10-15",
+              name: "PRANAVAKUMAR S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104108",
+              dob: "2004-11-09",
+              name: "PRASANNAKUMAR K K",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104109",
+              dob: "2004-10-18",
+              name: "PRASANNARAJ G",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104110",
+              dob: "2005-06-12",
+              name: "PRAVEEN RAJ P",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104111",
+              dob: "2004-07-11",
+              name: "PRITHIV RITHAN S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104112",
+              dob: "2005-05-20",
+              name: "PUGAZHMANI T",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104113",
+              dob: "2004-09-17",
+              name: "RAGUL P",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104114",
+              dob: "2004-09-26",
+              name: "RAGUL R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104115",
+              dob: "2004-11-22",
+              name: "RAGUNATH R",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104116",
+              dob: "2004-11-27",
+              name: "RAJALAKSHMI V",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104117",
+              dob: "2003-08-31",
+              name: "RAAJASRI C",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104118",
+              dob: "2004-01-27",
+              name: "RAMYA V S",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104119",
+              dob: "2004-10-08",
+              name: "RANJITH KUMAR M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104120",
+              dob: "2005-03-04",
+              name: "RISHAP M",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104305",
+              dob: "2004-12-16",
+              name: "GOPINATH V",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104306",
+              dob: "2005-08-28",
+              name: "GURU PRASANTH V",
+              total_number: 0,
+              attend: 0,
+            },
+            {
+              regNo: "142222104307",
+              dob: "2001-05-13",
+              name: "JEROME SAMUEL D",
+              total_number: 0,
+              attend: 0,
+            },
+          ];
+
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const user = users.find(
+                (user) => user.regNo === regNo && user.dob === dob
+              );
+              if (user) {
+                resolve(user);
+              } else {
+                reject("Invalid registration number or date of birth");
+              }
+            }, 1000);
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
