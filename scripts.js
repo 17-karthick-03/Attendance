@@ -18,11 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 
   closePopupButton.addEventListener("click", closePopup);
-  window.addEventListener("click", function (event) {
-    if (event.target === popupContainer) {
-      closePopup();
-    }
-  });
 
   dataForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -32,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchAttendanceData(regNo, dob)
         .then((data) => {
           const attendancePercentage = calculateAttendancePercentage(data.attend, data.total_number);
-          showPopup(`Dear ${data.name},<br>Your attendance percentage is ${attendancePercentage.toFixed(2)}% (${attendancePercentage.toFixed(0)}%).`);
+          const searchCount = recordUserSearch(regNo, dob);
+          showPopup(`Dear ${data.name},<br>Your attendance percentage is ${attendancePercentage.toFixed(2)}% (${attendancePercentage.toFixed(0)}%).<br>You have searched ${searchCount} times.`);
         })
         .catch((error) => {
           console.error("Error fetching attendance data:", error);
@@ -48,8 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showPopup(message) {
-    popupContent.innerHTML = `<p>${message}</p>`;
+    popupContent.innerHTML = `
+      <p>${message}</p>
+      <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
+    `;
     popupContainer.style.display = "flex";
+
+    const agreeButton = document.getElementById("agreeButton");
+    agreeButton.addEventListener("click", function () {
+      closePopup();
+      closeTab(); // Function to close the tab or window
+    });
   }
 
   function validateInput(regNo, dob) {
@@ -128,14 +133,24 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const user = users.find(user => user.regNo === regNo && user.dob === dob);
-        if (user) {
-          resolve(user);
-        } else {
-          reject("Invalid registration number or date of birth");
-        }
-      }, 1000);
+      const user = users.find((u) => u.regNo === regNo && u.dob === dob);
+      if (user) {
+        resolve(user);
+      } else {
+        reject("User not found");
+      }
     });
+  }
+
+  function recordUserSearch(regNo, dob) {
+    const searches = JSON.parse(localStorage.getItem("userSearches")) || [];
+    const currentUserSearches = searches.filter((search) => search.regNo === regNo && search.dob === dob);
+    searches.push({ regNo, dob, timestamp: new Date().toISOString() });
+    localStorage.setItem("userSearches", JSON.stringify(searches));
+    return currentUserSearches.length + 1;
+  }
+
+  function closeTab() {
+    window.close(); // This function will close the current tab or window
   }
 });
