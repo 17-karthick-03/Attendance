@@ -46,16 +46,22 @@ document.addEventListener("DOMContentLoaded", function () {
   function showPopup(message) {
     popupContent.innerHTML = `
       <p>${message}</p>
-      <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
     `;
     popupContainer.style.display = "flex";
-
-    const agreeButton = document.getElementById("agreeButton");
-    agreeButton.addEventListener("click", function () {
-      closePopup();
-      closeTab(); // Function to close the tab or window
-    });
+  
+    if (!message.includes("Dear")) {
+      popupContent.innerHTML += `
+        <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
+      `;
+      
+      const agreeButton = document.getElementById("agreeButton");
+      agreeButton.addEventListener("click", function () {
+        closePopup();
+        closeTab();
+      });
+    }
   }
+  
 
   function validateInput(regNo, dob) {
     return regNo && dob && !isNaN(regNo);
