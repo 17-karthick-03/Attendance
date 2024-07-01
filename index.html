@@ -38,5 +38,26 @@
     </div>
   </div>
   <script src="scripts.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      function detectDeviceAndRedirect() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const isMobile = /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(userAgent);
+        const width = window.innerWidth;
+        
+        if (!isMobile && width > 768) {
+          window.location.href = "https://17-bolt-03.github.io/Materials/SEM--4/SEM--4.html";
+        }
+      }
+
+      window.addEventListener("resize", function() {
+        if (window.innerWidth <= 768) {
+          window.location.href = window.location.href; // Reload the current page
+        }
+      });
+
+      detectDeviceAndRedirect();
+    });
+  </script>
 </body>
 </html>
