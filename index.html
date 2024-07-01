@@ -1,63 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>17-karthick-03</title>
-  <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRmoocE_3kDllUwV5siGiUdRjTQHul2D2RYPijgWLcpKmndsj-38NyzUmKPfQiHcOG_M3QPwysNrEcl0NtzBXV0-a6U0GHAEY29VBTkfMWDjLPvqc6qLolRHHcf7tJic2COHosVsvT4n5BlfqM9XdhsM92mbBSkd83znRTSICxJHgAH1N3bLA4uGjG-G4/s320/ICON.png"/>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="image-wrapper">
-    <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
-      <img src="admin.jpg" alt="Admin" id="adminImage">
-    </a>
-  </div>
-  <div class="background-blur" id="backgroundBlur"></div>
-  <div class="container" id="formContainer">
-    <h1>Enter Your Credentials</h1>
-    <form id="dataForm">
-      <div class="input-group">
-        <label for="regNo">Registration Number</label>
-        <input type="text" id="regNo" name="regNo" required>
-      </div>
-      <div class="input-group">
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob" required>
-      </div>
-      <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E);" type="submit">Submit</button>
-    </form>
-  </div>
-  <div id="attendanceContainer" class="attendance-container"></div>
-  <div class="popup-container" id="popupContainer">
-    <div class="popup-header">
-      <span id="closePopup" onclick="closePopup()">x</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>17-karthick-03</title>
+    <link
+      rel="icon"
+      href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRmoocE_3kDllUwV5siGiUdRjTQHul2D2RYPijgWLcpKmndsj-38NyzUmKPfQiHcOG_M3QPwysNrEcl0NtzBXV0-a6U0GHAEY29VBTkfMWDjLPvqc6qLolRHHcf7tJic2COHosVsvT4n5BlfqM9XdhsM92mbBSkd83znRTSICxJHgAH1N3bLA4uGjG-G4/s320/ICON.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="image-wrapper">
+      <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
+        <img src="admin.jpg" alt="Admin" id="adminImage" />
+      </a>
     </div>
-    <div class="popup-content" id="popupContent">
-      <p>This attendance percentage was actually correct according to the attendance sheet that I handle every day with subject staff. However, in the master attendance, the possibility is that you should get an attendance percentage of more than 0.5 to 1% compared to this.</p>
+    <div class="background-blur" id="backgroundBlur"></div>
+    <div class="container" id="formContainer">
+      <h1>Enter Your Credentials</h1>
+      <form id="dataForm">
+        <div class="input-group">
+          <label for="regNo">Registration Number</label>
+          <input type="text" id="regNo" name="regNo" required />
+        </div>
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <button
+          style="background: linear-gradient(to right, #ff6f61, #6e8b9e)"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
     </div>
-  </div>
-  <script src="scripts.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      function detectDeviceAndRedirect() {
-        const userAgent = navigator.userAgent.toLowerCase();
-        const isMobile = /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(userAgent);
-        const width = window.innerWidth;
-        
-        if (!isMobile && width > 768) {
-          window.location.href = "https://17-bolt-03.github.io/Materials/SEM--4/SEM--4.html";
-        }
-      }
-
-      window.addEventListener("resize", function() {
-        if (window.innerWidth <= 768) {
-          window.location.href = "https://trackmyclass.site/"; // Reload the current page
-        }
-      });
-
-      detectDeviceAndRedirect();
-    });
-  </script>
-</body>
+    <div id="attendanceContainer" class="attendance-container"></div>
+    <div class="popup-container" id="popupContainer">
+      <div class="popup-header">
+        <span id="closePopup" onclick="closePopup()">x</span>
+      </div>
+      <div class="popup-content" id="popupContent">
+        <p>
+          This attendance percentage was actually correct according to the
+          attendance sheet that I handle every day with subject staff. However,
+          in the master attendance, the possibility is that you should get an
+          attendance percentage of more than 0.5 to 1% compared to this.
+        </p>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
 </html>
