@@ -57,11 +57,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const agreeButton = document.getElementById("agreeButton");
       agreeButton.addEventListener("click", function () {
         closePopup();
-        closeTab();
       });
     }
   }
-  
 
   function validateInput(regNo, dob) {
     return regNo && dob && !isNaN(regNo);
@@ -154,9 +152,5 @@ document.addEventListener("DOMContentLoaded", function () {
     searches.push({ regNo, dob, timestamp: new Date().toISOString() });
     localStorage.setItem("userSearches", JSON.stringify(searches));
     return currentUserSearches.length + 1;
-  }
-
-  function closeTab() {
-    window.close(); // This function will close the current tab or window
   }
 });
