@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Schedule</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
+
+      body {
+        font-family: "Signika", sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      .calendar-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 80%;
+        margin: 20px auto;
+        overflow: hidden;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0 0 15px;
+        text-transform: uppercase;
+        color: #007bff;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px; /* Add space between filter box and table */
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        font-size: 15px;
+      }
+      th {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+      }
+      td {
+        background-color: #f2f2f2;
+        color: #333;
+      }
+      .filter-container {
+        margin-bottom: 20px; /* Add margin below filter box */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .filter-container label {
+        font-weight: bold;
+        margin-right: 10px;
+        color: #333; /* Adjust label color */
+      }
+
+      .filter-container select {
+        padding: 10px; /* Increase padding for better touch interaction */
+        font-size: 16px; /* Larger font size for better readability */
+        border: 1px solid #007bff; /* Blue border color */
+        border-radius: 8px; /* Rounded corners */
+        background-color: #fff; /* White background */
+        cursor: pointer;
+        appearance: none; /* Remove default styling */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+      }
+
+      .filter-container select:focus {
+        outline: none; /* Remove focus outline */
+        border-color: #0056b3; /* Darker blue on focus */
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light shadow on focus */
+      }
+
+      .filter-container::after {
+        content: "\25BC"; /* Down arrow character */
+        font-size: 14px;
+        color: #007bff; /* Blue color */
+        margin-left: 5px;
+      }
+
+      /* Hover effect */
+      .filter-container:hover select {
+        border-color: #0056b3; /* Darker blue on hover */
+      }
+
+      /* Focus effect */
+      .filter-container select:focus + label {
+        color: #0056b3; /* Darker blue label on focus */
+      }
+
+      /* Styling for options */
+      .filter-container select option {
+        background-color: #fff;
+        color: #333;
+      }
+
+      /* Styling for dropdown icon */
+      .filter-container::after {
+        content: "\25BC"; /* Down arrow character */
+        font-size: 12px;
+        color: #007bff; /* Blue color */
+        margin-left: 5px;
+      }
+
+      .weekend {
+        background-color: #ffc107; /* Yellow for holidays */
+        font-weight: bold; /* Light gray for weekends */
+      }
+      .holiday {
+        background-color: #ffc107; /* Yellow for holidays */
+        font-weight: bold;
+      }
+      @media (min-width: 480px) {
+        .calendar-container {
+          display: none; /* Hide calendar container for screens larger than mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calendar-container">
+      <h1>Academic Schedule-2024-2025</h1>
+      <h1>UG(R2019) V SEMESTER</h1>
+      <div class="filter-container">
+        <label for="filter-select">Filter by:</label>
+        <select id="filter-select" onchange="filterCalendar()">
+          <option value="all">All Months</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+          <option value="cat1">CAT-1</option>
+          <option value="cat2">CAT-2</option>
+        </select>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="calendar-body">
+          <!-- JavaScript will insert rows here -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function generateCalendar(startDate, endDate) {
+        const daysOfWeek = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+        const holidays = ["2024-08-26", "2024-09-16"]; // Specific holidays, format: yyyy-mm-dd
+        const excludedDates = [
+          "2024-08-26",
+          "2024-09-16",
+          "2024-10-11",
+          "2024-10-31",
+          "2024-10-02",
+          "2024-08-15",
+        ]; // Excluded specific dates
+        const calendarBody = document.getElementById("calendar-body");
+        calendarBody.innerHTML = ""; // Clear existing calendar
+
+        let currentDate = new Date(startDate);
+        const end = new Date(endDate);
+
+        let dayCounter = 1;
+
+        while (currentDate <= end) {
+          const dayOfWeek = currentDate.getDay();
+          const dateString = currentDate.toISOString().split("T")[0];
+
+          // Determine status
+          let status = "";
+          if (holidays.includes(dateString)) {
+            status = "Holiday";
+          } else if (dayOfWeek === 0 || dayOfWeek === 6) {
+            status = "Weekend";
+          } else if (excludedDates.includes(dateString)) {
+            status = "Holiday";
+          } else {
+            status = `Day ${dayCounter}`;
+            dayCounter++;
+          }
+
+          const row = document.createElement("tr");
+          const dateCell = document.createElement("td");
+          const dayCell = document.createElement("td");
+          const statusCell = document.createElement("td");
+
+          dateCell.textContent = currentDate.toLocaleDateString("en-GB");
+          dayCell.textContent = daysOfWeek[dayOfWeek];
+          statusCell.textContent = status;
+
+          // Add class based on status
+          if (status === "Weekend") {
+            row.classList.add("weekend");
+          } else if (status === "Holiday") {
+            row.classList.add("holiday");
+          }
+
+          row.appendChild(dateCell);
+          row.appendChild(dayCell);
+          row.appendChild(statusCell);
+          calendarBody.appendChild(row);
+
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+      }
+
+      function filterCalendar() {
+        const filterSelect = document.getElementById("filter-select");
+        const calendarBody = document.getElementById("calendar-body");
+
+        let startDate = "2024-07-24"; // Default start date for July
+        let endDate = "2024-07-31"; // Default end date for July
+
+        switch (filterSelect.value) {
+          case "07":
+            startDate = "2024-07-24";
+            endDate = "2024-07-31";
+            break;
+          case "08":
+            startDate = "2024-08-01";
+            endDate = "2024-08-31";
+            break;
+          case "09":
+            startDate = "2024-09-01";
+            endDate = "2024-09-30";
+            break;
+          case "10":
+            startDate = "2024-10-01";
+            endDate = "2024-10-31";
+            break;
+          case "11":
+            startDate = "2024-11-01";
+            endDate = "2024-11-30";
+            break;
+          case "12":
+            startDate = "2024-12-01";
+            endDate = "2024-12-05";
+            break;
+          case "cat1":
+            startDate = "2024-09-10";
+            endDate = "2024-09-19";
+            break;
+          case "cat2":
+            startDate = "2024-11-11";
+            endDate = "2024-11-18";
+            break;
+          default:
+            startDate = "2024-07-24";
+            endDate = "2024-12-05";
+            break;
+        }
+
+        generateCalendar(startDate, endDate);
+      }
+
+      // Initial calendar generation
+      generateCalendar("2024-07-24", "2024-12-05");
+    </script>
+  </body>
+</html>
