@@ -149,6 +149,7 @@
           <option value="12">December</option>
           <option value="cat1">CAT-1</option>
           <option value="cat2">CAT-2</option>
+          <option value="holidays">Holidays</option>
         </select>
       </div>
       <table>
@@ -166,7 +167,9 @@
     </div>
 
     <script>
-      function generateCalendar(startDate, endDate) {
+      const holidays = ["2024-08-26", "2024-09-16", "2024-10-11", "2024-10-31", "2024-10-02", "2024-08-15"]; // Specific holidays, format: yyyy-mm-dd
+
+      function generateCalendar(startDate, endDate, filter = "all") {
         const daysOfWeek = [
           "Sunday",
           "Monday",
@@ -176,15 +179,6 @@
           "Friday",
           "Saturday",
         ];
-        const holidays = ["2024-08-26", "2024-09-16"]; // Specific holidays, format: yyyy-mm-dd
-        const excludedDates = [
-          "2024-08-26",
-          "2024-09-16",
-          "2024-10-11",
-          "2024-10-31",
-          "2024-10-02",
-          "2024-08-15",
-        ]; // Excluded specific dates
         const calendarBody = document.getElementById("calendar-body");
         calendarBody.innerHTML = ""; // Clear existing calendar
 
@@ -203,11 +197,15 @@
             status = "Holiday";
           } else if (dayOfWeek === 0 || dayOfWeek === 6) {
             status = "Weekend";
-          } else if (excludedDates.includes(dateString)) {
-            status = "Holiday";
           } else {
             status = `Day ${dayCounter}`;
             dayCounter++;
+          }
+
+          // Filter logic
+          if (filter === "holidays" && status !== "Holiday" && status !== "Weekend") {
+            currentDate.setDate(currentDate.getDate() + 1);
+            continue;
           }
 
           const row = document.createElement("tr");
@@ -275,6 +273,11 @@
             startDate = "2024-11-11";
             endDate = "2024-11-18";
             break;
+          case "holidays":
+            startDate = "2024-07-24";
+            endDate = "2024-12-05";
+            generateCalendar(startDate, endDate, "holidays");
+            return;
           default:
             startDate = "2024-07-24";
             endDate = "2024-12-05";
