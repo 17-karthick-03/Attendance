@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { regNo: "142222104070", dob: "2005-06-24", name: "JESHWA S", total_number: 0, attend: 0 },
       { regNo: "142222104071", dob: "2004-08-01", name: "JOTHI PRAKASH N", total_number: 0, attend: 0 },
       { regNo: "142222104072", dob: "2005-06-25", name: "KABILAN R", total_number: 0, attend: 0 },
-      { regNo: "142222104073", dob: "2005-03-17", name: "KARTHICK S", total_number: 10, attend: 8 },
+      { regNo: "142222104073", dob: "2005-03-17", name: "KARTHICK S", total_number: 0, attend: 0 },
       { regNo: "142222104074", dob: "2005-03-08", name: "KARTHIK S G", total_number: 0, attend: 0 },
       { regNo: "142222104075", dob: "2005-03-17", name: "KARTHIKEYAN D", total_number: 0, attend: 0 },
       { regNo: "142222104076", dob: "2004-12-08", name: "KATHEEB ANSARI", total_number: 0, attend: 0 },
