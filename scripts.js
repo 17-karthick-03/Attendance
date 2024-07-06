@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dob: "2005-03-17",
         name: "KARTHICK S",
         total_number: 10,
-        attend: 8,
+        attend: 9,
       },
       {
         regNo: "142222104074",
