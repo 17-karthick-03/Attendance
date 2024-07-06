@@ -168,8 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
         regNo: "142222104073",
         dob: "2005-03-17",
         name: "KARTHICK S",
-        total_number: 0,
-        attend: 0,
+        total_number: 10,
+        attend: 8,
       },
       {
         regNo: "142222104074",
