@@ -9,12 +9,13 @@
 
       body {
         font-family: "Signika", sans-serif;
-        background-color: #f0f0f0;
+        background: linear-gradient(to right, #ff7e5f, #feb47b); /* Teal to orange gradient */
         color: #333;
         text-align: center;
         margin: 0;
         padding: 0;
       }
+
       .calendar-container {
         background-color: #fff;
         border-radius: 10px;
@@ -24,17 +25,20 @@
         overflow: hidden;
         padding: 20px;
       }
+
       h1 {
         font-size: 20px;
         margin: 0 0 15px;
         text-transform: uppercase;
-        color: #007bff;
+        color: #ff7e5f; /* Matching the gradient color */
       }
+
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px; /* Add space between filter box and table */
+        margin-top: 20px;
       }
+
       th,
       td {
         padding: 10px;
@@ -42,17 +46,20 @@
         border: 1px solid #ddd;
         font-size: 15px;
       }
+
       th {
-        background-color: #007bff;
+        background-color: #ff7e5f; /* Matching the gradient color */
         color: #fff;
         font-weight: bold;
       }
+
       td {
-        background-color: #f2f2f2;
+        background-color: #f0f8ff; /* Light blue background */
         color: #333;
       }
+
       .filter-container {
-        margin-bottom: 20px; /* Add margin below filter box */
+        margin-bottom: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -61,69 +68,67 @@
       .filter-container label {
         font-weight: bold;
         margin-right: 10px;
-        color: #333; /* Adjust label color */
+        color: #333;
       }
 
       .filter-container select {
-        padding: 10px; /* Increase padding for better touch interaction */
-        font-size: 16px; /* Larger font size for better readability */
-        border: 1px solid #007bff; /* Blue border color */
-        border-radius: 8px; /* Rounded corners */
-        background-color: #fff; /* White background */
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ff7e5f;
+        border-radius: 8px;
+        background-color: #fff;
         cursor: pointer;
-        appearance: none; /* Remove default styling */
+        appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
       }
 
       .filter-container select:focus {
-        outline: none; /* Remove focus outline */
-        border-color: #0056b3; /* Darker blue on focus */
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light shadow on focus */
+        outline: none;
+        border-color: #feb47b;
+        box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
       }
 
       .filter-container::after {
-        content: "\25BC"; /* Down arrow character */
+        content: "\25BC";
         font-size: 14px;
-        color: #007bff; /* Blue color */
+        color: #ff7e5f;
         margin-left: 5px;
       }
 
-      /* Hover effect */
       .filter-container:hover select {
-        border-color: #0056b3; /* Darker blue on hover */
+        border-color: #feb47b;
       }
 
-      /* Focus effect */
       .filter-container select:focus + label {
-        color: #0056b3; /* Darker blue label on focus */
+        color: #feb47b;
       }
 
-      /* Styling for options */
       .filter-container select option {
         background-color: #fff;
         color: #333;
       }
 
-      /* Styling for dropdown icon */
       .filter-container::after {
-        content: "\25BC"; /* Down arrow character */
+        content: "\25BC";
         font-size: 12px;
-        color: #007bff; /* Blue color */
+        color: #ff7e5f;
         margin-left: 5px;
       }
 
       .weekend {
-        background-color: #ffc107; /* Yellow for holidays */
-        font-weight: bold; /* Light gray for weekends */
-      }
-      .holiday {
-        background-color: #ffc107; /* Yellow for holidays */
+        background-color: #ffc107;
         font-weight: bold;
       }
+
+      .holiday {
+        background-color: #ffc107;
+        font-weight: bold;
+      }
+
       @media (min-width: 480px) {
         .calendar-container {
-          display: none; /* Hide calendar container for screens larger than mobile */
+          display: none;
         }
       }
     </style>
