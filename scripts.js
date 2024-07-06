@@ -52,9 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function showPopup(message) {
-    popupContent.innerHTML = `
-        <p>${message}</p>
-      `;
+    popupContent.innerHTML = `<p>${message}</p>`;
     popupContainer.style.display = "flex";
 
     if (!message.includes("Dear")) {
@@ -526,6 +524,8 @@ document.addEventListener("DOMContentLoaded", function () {
     return new Promise((resolve, reject) => {
       const user = users.find((u) => u.regNo === regNo && u.dob === dob);
       if (user) {
+        // Adding a timestamp to the resolved data to ensure cache busting
+        user.timestamp = new Date().getTime();
         resolve(user);
       } else {
         reject("User not found");
