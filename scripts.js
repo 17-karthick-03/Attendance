@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
               data.name
             },<br>Your attendance percentage is ${attendancePercentage.toFixed(
               2
-            )}% (${attendancePercentage.toFixed(0)}%).`
+            )}% (${attendancePercentage.toFixed(0)}%).`,
+            regNo,
+            dob
           );
         })
         .catch((error) => {
@@ -51,20 +53,46 @@ document.addEventListener("DOMContentLoaded", function () {
     popupContainer.style.display = "none";
   }
 
-  function showPopup(message) {
-    popupContent.innerHTML = `<p>${message}</p>`;
-    popupContainer.style.display = "flex";
+  function showPopup(message, regNo, dob) {
+    let content = `<p>${message}</p>`;
+    const imageBasePath = "images/";
+    const imageExtension = ".jpg";
+    const imagePath = `${imageBasePath}${regNo}${imageExtension}`;
 
-    if (!message.includes("Dear")) {
-      popupContent.innerHTML += `
+    // Check if the image path exists
+    fetch(imagePath)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Image not found");
+        }
+        return imagePath;
+      })
+      .then((imagePath) => {
+        content = `<img src="${imagePath}" alt="Student Image" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">${content}`;
+        popupContent.innerHTML = content;
+        popupContainer.style.display = "flex";
+        addAgreeButton(); // Call function to add Agree and Continue button
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle case where image is not found
+        popupContent.innerHTML = content;
+        popupContainer.style.display = "flex";
+        addAgreeButton(); // Call function to add Agree and Continue button
+      });
+
+    function addAgreeButton() {
+      if (!message.includes("Dear")) {
+        popupContent.innerHTML += `
           <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
         `;
 
-      const agreeButton = document.getElementById("agreeButton");
-      agreeButton.addEventListener("click", function () {
-        clearCache();
-        closePopup();
-      });
+        const agreeButton = document.getElementById("agreeButton");
+        agreeButton.addEventListener("click", function () {
+          clearCache();
+          closePopup();
+        });
+      }
     }
   }
 
@@ -78,10 +106,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function fetchAttendanceData(regNo, dob) {
     return fetch(`data/users.json?timestamp=${new Date().getTime()}`)
-      .then(response => response.json())
-      .then(users => {
+      .then((response) => response.json())
+      .then((users) => {
         return new Promise((resolve, reject) => {
-          const user = users.find(u => u.regNo === regNo && u.dob === dob);
+          const user = users.find((u) => u.regNo === regNo && u.dob === dob);
           if (user) {
             // Adding a timestamp to the resolved data to ensure cache busting
             user.timestamp = new Date().getTime();
