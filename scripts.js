@@ -36,8 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },<br>Your attendance percentage is ${attendancePercentage.toFixed(
               2
             )}% (${attendancePercentage.toFixed(0)}%).`,
-            regNo,
-            dob
+            data.img
           );
         })
         .catch((error) => {
@@ -53,46 +52,48 @@ document.addEventListener("DOMContentLoaded", function () {
     popupContainer.style.display = "none";
   }
 
-  function showPopup(message, regNo, dob) {
+  function showPopup(message, imgPath) {
     let content = `<p>${message}</p>`;
-    const imageBasePath = "images/";
-    const imageExtension = ".jpg";
-    const imagePath = `${imageBasePath}${regNo}${imageExtension}`;
-
-    // Check if the image path exists
-    fetch(imagePath)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Image not found");
-        }
-        return imagePath;
-      })
-      .then((imagePath) => {
-        content = `<img src="${imagePath}" alt="Student Image" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">${content}`;
-        popupContent.innerHTML = content;
-        popupContainer.style.display = "flex";
-        addAgreeButton(); // Call function to add Agree and Continue button
-      })
-      .catch((error) => {
-        console.error(error);
-        // Handle case where image is not found
-        popupContent.innerHTML = content;
-        popupContainer.style.display = "flex";
-        addAgreeButton(); // Call function to add Agree and Continue button
-      });
-
-    function addAgreeButton() {
-      if (!message.includes("Dear")) {
-        popupContent.innerHTML += `
-          <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
-        `;
-
-        const agreeButton = document.getElementById("agreeButton");
-        agreeButton.addEventListener("click", function () {
-          clearCache();
-          closePopup();
+    if (imgPath) {
+      // Check if the image path exists
+      fetch(`data/${imgPath}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Image not found");
+          }
+          return `data/${imgPath}`;
+        })
+        .then((imagePath) => {
+          content = `<img src="${imagePath}" alt="Student Image" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px;">${content}`;
+          popupContent.innerHTML = content;
+          popupContainer.style.display = "flex";
+          addAgreeButton(message); // Call function to add Agree and Continue button
+        })
+        .catch((error) => {
+          console.error(error);
+          // Handle case where image is not found
+          popupContent.innerHTML = content;
+          popupContainer.style.display = "flex";
+          addAgreeButton(message); // Call function to add Agree and Continue button
         });
-      }
+    } else {
+      popupContent.innerHTML = content;
+      popupContainer.style.display = "flex";
+      addAgreeButton(message); // Call function to add Agree and Continue button
+    }
+  }
+
+  function addAgreeButton(message) {
+    if (!message.includes("Dear")) {
+      popupContent.innerHTML += `
+        <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
+      `;
+
+      const agreeButton = document.getElementById("agreeButton");
+      agreeButton.addEventListener("click", function () {
+        clearCache();
+        closePopup();
+      });
     }
   }
 
