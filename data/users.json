@@ -63,7 +63,7 @@
         "date":"08/10/2024 by KaRtHiCk S"
     },
     {
-        "regNo": "68",
+        "regNo": "142222104068",
         "dob": "2005-04-03",
         "name": "JEEVANANTHAM B",
         "total_number": 388,
@@ -72,7 +72,7 @@
         "date":"08/10/2024 by KaRtHiCk S"
     },
     {
-        "regNo": "69",
+        "regNo": "142222104069",
         "dob": "2005-06-24",
         "name": "JEEVARAJ S P",
         "total_number": 388,
@@ -108,7 +108,7 @@
         "date":"08/10/2024 by KaRtHiCk S"
     },
     {
-        "regNo": "73",
+        "regNo": "142222104073",
         "dob": "2005-03-17",
         "name": "KARTHICK S",
         "total_number": 388,
@@ -324,7 +324,7 @@
         "date":"08/10/2024 by KaRtHiCk S"
     },
     {
-        "regNo": "98",
+        "regNo": "142222104098",
         "dob": "2005-10-08",
         "name": "NAVEEN KUMAR S",
         "total_number": 388,
@@ -333,7 +333,7 @@
         "date":"08/10/2024 by KaRtHiCk S"
     },
     {
-        "regNo": "99",
+        "regNo": "142222104099",
         "dob": "2003-06-13",
         "name": "NIKHIL B",
         "total_number": 388,
@@ -565,14 +565,5 @@
         "attend": 9,
         "img":"142293425.jpg",
         "date":"08/10/2024 by KaRtHiCk S"
-    },
-    {
-        "regNo": "142222104077",
-        "dob": "2005-02-19",
-        "name": "KAVEEYA M",
-        "total_number": 208,
-        "attend": 162,
-        "img":"142222104077.jpg",
-        "date":"31/08/2024 by BOLT"
     }
 ]
