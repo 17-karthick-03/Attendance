@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
             data.total_number
           );
           showPopup(
-            `Dear ${data.name},<br>Your attendance percentage is ${attendancePercentage.toFixed(2)}% (${attendancePercentage.toFixed(0)}%).`,
+            `Dear ${data.name},<br>Your attendance percentage is ${attendancePercentage.toFixed(2)}% (${attendancePercentage.toFixed(0)}%)..<br>Last Updated on ${
+              data.date}`,
             data.img
           );
         })
