@@ -31,13 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
             data.total_number
           );
           showPopup(
-            `Dear ${
-              data.name
-            },<br>Your attendance percentage is ${attendancePercentage.toFixed(
-              2
-            )}% (${attendancePercentage.toFixed(0)}%).<br>Last Updated on ${
-              data.date
-            }`,
+            `Dear ${data.name},<br>Your attendance percentage is ${attendancePercentage.toFixed(2)}% (${attendancePercentage.toFixed(0)}%).`,
             data.img
           );
         })
@@ -88,15 +82,42 @@ document.addEventListener("DOMContentLoaded", function () {
   function addAgreeButton(message) {
     if (!message.includes("Dear")) {
       popupContent.innerHTML += `
-          <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
-        `;
+        <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="agreeButton">Agree and Continue</button>
+      `;
 
       const agreeButton = document.getElementById("agreeButton");
+      const closeButton = document.getElementById("closeButton");
+
       agreeButton.addEventListener("click", function () {
         clearCache();
         closePopup();
+        showAdvicePopup(); // Show advice popup after agreement
+      });
+
+      closeButton.addEventListener("click", function () {
+        closePopup();
+        showAdvicePopup(); // Show advice popup if user clicks 'X'
       });
     }
+  }
+
+  function showAdvicePopup() {
+    const adviceContent = `
+      <p>😩 Tired of entering your credentials like it's a secret mission? We hear you! 🚀</p>
+      <p>Why not take a break and let the TrackMyClass Telegram Bot do the heavy lifting? 💪</p>
+      <p>With just your last two digits of your registration number, you can skip the hassle and get your attendance in a flash! ⚡</p>
+      <p>Join the fun and make attendance tracking a breeze! 🌬️ Click here: <a href="https://t.me/trackmyclassbot" target="_blank">TrackMyClass Telegram Bot</a></p>
+      <p>Remember, life is too short for complicated attendance forms—let's keep it simple! 😄</p>
+      <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="tryNowButton">Try Now</button>
+    `;
+    
+    popupContent.innerHTML = adviceContent;
+    popupContainer.style.display = "flex";
+
+    const tryNowButton = document.getElementById("tryNowButton");
+    tryNowButton.addEventListener("click", function () {
+      window.open("https://t.me/trackmyclassbot", "_blank");
+    });
   }
 
   function validateInput(regNo, dob) {
