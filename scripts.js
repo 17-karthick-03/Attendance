@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const adviceContent = `
       <p>😩 Tired of entering your credentials like it's a secret mission? We hear you! 🚀</p>
       <p>Why not take a break and let the TrackMyClass Telegram Bot do the heavy lifting? 💪</p>
-      <p>With just your last two digits of your registration number, you can skip the hassle and get your attendance in a flash! ⚡</p>
+      <p>With just your last two digits of your registration number, you can skip the hassle and get your attendance & more stuff in a flash! ⚡</p>
       <p>Join the fun and make attendance tracking a breeze! 🌬️ Click here: <a href="https://t.me/trackmyclassbot" target="_blank">TrackMyClass Telegram Bot</a></p>
       <p>Remember, life is too short for complicated attendance forms—let's keep it simple! 😄</p>
       <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="tryNowButton">Try Now</button>
