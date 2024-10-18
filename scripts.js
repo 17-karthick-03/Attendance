@@ -109,23 +109,15 @@ document.addEventListener("DOMContentLoaded", function () {
       <p>With just your last two digits of your registration number, you can skip the hassle and get your attendance & more stuff in a flash! ⚡</p>
       <p>Join the fun and make attendance tracking a breeze! 🌬️ Click here: <a href="https://t.me/trackmyclassbot" target="_blank">TrackMyClass Telegram Bot</a></p>
       <p>Remember, life is too short for complicated attendance forms—let's keep it simple! 😄</p>
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 10px;">
-        <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px; margin-right: 10px;" id="tryNowButton">Try Now</button>
-        <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px;" id="laterButton">Later</button>
-      </div>
+      <button style="background: linear-gradient(to right, #FF6F61, #6E8B9E); border-radius: 15px" id="tryNowButton">Try Now</button>
     `;
-    
+
     popupContent.innerHTML = adviceContent;
     popupContainer.style.display = "flex";
 
     const tryNowButton = document.getElementById("tryNowButton");
     tryNowButton.addEventListener("click", function () {
       window.open("https://t.me/trackmyclassbot", "_blank");
-    });
-
-    const laterButton = document.getElementById("laterButton");
-    laterButton.addEventListener("click", function () {
-      popupContainer.style.display = "none";
     });
   }
 
