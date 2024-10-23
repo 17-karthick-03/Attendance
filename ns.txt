@@ -1,0 +1,71 @@
+NS-2.35 installation in Ubuntu 24.04 
+
+Commands to be used:
+$ cat /etc/lsb-release
+$ sudo apt update
+$ sudo apt install build-essential autoconf automake libxmu-dev
+
+Requirements of ns2
+gcc-4.8 
+g++-4.8
+Were available only upto 18.04 which the codename is bionic
+
+$ sudo gedit /etc/apt/sources.list.d/ubuntu.sources
+make an entry in the above file
+deb http://in.archive.ubuntu.com/ubuntu/ bionic main universe
+$ sudo apt update
+
+For any GPG error, include the following command
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+$ sudo apt update
+$ sudo apt install gcc-4.8 g++-4.8
+
+Download ns-2.35 from the website. 
+http://sourceforge.net/projects/nsnam...
+
+Since ns2.35 is too old (2011) and hence it will work on the gcc and g++ version of 4.8. So we need to change the default gcc to gcc-4.8 and g++ to g++-4.8
+
+Here are the files that need to be modified.
+
+Make the changes in the following files
+@CC@ to be replaced with gcc-4.8
+@CPP@ to be replaced with g++-4.8
+
+ns-allinone-2.35/Makefile.in
+/home/pradeepkumar/ns-allinone-2.35/otcl-1.14/Makefile.in
+nam-1.15/Makefile.in
+xgraph-12.2/Makefile.in
+
+all changes were made.
+
+In all the above places, change @CC@ to gcc-4.8 
+and @CPP@ @CXX@ to g++-4.8
+
+Open the file 
+ns-2.35/linkstate/ls.h
+in line number 137, change the line erase to this (->) erase
+
+Run the installation now
+Open a terminal
+
+$ cd ns-allinone-2.35/
+
+$ ./install
+
+Once the installation is over, Set the PATH and LD_LIBRARY_PATH infomration in the file located at 
+open another terminal and issue the following command.
+$ gedit /home/pradeepkumar/.bashrc
+
+export PATH=$PATH:/home/pradeepkumar/ns-allinone-2.35/bin:/home/pradeepkumar/ns-allinone-2.35/tcl8.5.10/unix:/home/pradeepkumar/ns-allinone-2.35/tk8.5.10/unix
+export LD_LIBRARY_PATH=/home/pradeepkumar/ns-allinone-2.35/otcl-1.14:/home/pradeepkumar/ns-allinone-2.35/lib
+
+The field separator is a colon : here and there should not any blank space between the paths....
+
+$ source .bashrc
+
+$ns
+% indicates it install successfully.
+
+$nam 
+a window gets popped up
+It works well.
