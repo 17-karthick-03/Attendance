@@ -1,0 +1,38 @@
+2024-10-14 08:06:00,786 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-14 08:06:48,000 - User Naveen (None, ID: 2043182274) selected option: july
+2024-10-14 08:06:52,115 - User Naveen (None, ID: 2043182274) selected option: august
+2024-10-14 08:06:53,000 - User Naveen (None, ID: 2043182274) selected option: september
+2024-10-14 08:06:53,883 - User Naveen (None, ID: 2043182274) selected option: cat1
+2024-10-14 08:06:56,004 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:29:53,508 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-15 20:30:06,567 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:30:46,614 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104103
+2024-10-15 20:31:02,781 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:31:13,140 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104083
+2024-10-15 20:31:27,379 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104082
+2024-10-15 20:31:32,916 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:31:58,942 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104099
+2024-10-15 20:32:02,475 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:32:09,967 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104100
+2024-10-15 20:32:14,285 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:32:32,726 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104102
+2024-10-15 20:32:36,696 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-15 20:32:57,310 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-15 20:33:01,537 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-18 10:01:25,789 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-18 10:01:30,839 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104073
+2024-10-18 10:01:32,148 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-18 10:01:33,869 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-20 12:59:17,705 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-20 12:59:23,798 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-20 12:59:46,855 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-20 12:59:55,013 - User Naveen (None, ID: 2043182274) selected option: cat1
+2024-10-23 08:45:51,256 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-23 08:45:53,733 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-23 21:20:34,310 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-23 23:54:55,779 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-23 23:54:57,876 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-28 13:56:42,596 - User Naveen Kumar (None, ID: 2043182274) entered regNo: 142222104098
+2024-10-28 13:56:44,581 - User Naveen (None, ID: 2043182274) selected option: attendance
+2024-10-28 13:56:48,373 - User Naveen (None, ID: 2043182274) selected option: cat1
+2024-10-28 13:56:52,737 - User Naveen (None, ID: 2043182274) selected option: september
