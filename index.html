@@ -12,7 +12,6 @@
         dataLayer.push(arguments);
       }
       gtag('js', new Date());
-
       gtag('config', 'G-YQ02DLBGRX');
     </script>
     <link
@@ -21,9 +20,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <script>
-      // Check if screen width is 768 pixels or larger
       if (window.innerWidth >= 768) {
-        // Redirect to 404 error page for desktops and laptops
         window.location.href = "404.html";
       }
     </script>
@@ -70,6 +67,30 @@
         </p>
       </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Auto-fill if data exists in local storage
+        const regNo = localStorage.getItem('regNo');
+        const dob = localStorage.getItem('dob');
+        if (regNo) document.getElementById('regNo').value = regNo;
+        if (dob) document.getElementById('dob').value = dob;
+
+        // Save data on form submission
+        document.getElementById('dataForm').addEventListener('submit', function (e) {
+          e.preventDefault(); // Prevent form from submitting
+          
+          const regNoInput = document.getElementById('regNo').value;
+          const dobInput = document.getElementById('dob').value;
+          
+          // Save values to local storage
+          localStorage.setItem('regNo', regNoInput);
+          localStorage.setItem('dob', dobInput);
+          
+          alert('Credentials saved locally for future use!');
+          // Continue with form submission if needed
+        });
+      });
+    </script>
     <script src="scripts.js"></script>
   </body>
 </html>
