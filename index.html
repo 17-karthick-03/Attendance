@@ -8,7 +8,9 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ02DLBGRX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
 
       gtag('config', 'G-YQ02DLBGRX');
@@ -18,6 +20,13 @@
       href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRmoocE_3kDllUwV5siGiUdRjTQHul2D2RYPijgWLcpKmndsj-38NyzUmKPfQiHcOG_M3QPwysNrEcl0NtzBXV0-a6U0GHAEY29VBTkfMWDjLPvqc6qLolRHHcf7tJic2COHosVsvT4n5BlfqM9XdhsM92mbBSkd83znRTSICxJHgAH1N3bLA4uGjG-G4/s320/ICON.png"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      // Check if screen width is 768 pixels or larger
+      if (window.innerWidth >= 768) {
+        // Redirect to 404 error page for desktops and laptops
+        window.location.href = "index_2.html";
+      }
+    </script>
   </head>
   <body>
     <div class="image-wrapper">
