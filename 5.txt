@@ -1,0 +1,56 @@
+DaytimeClient.java
+
+import java.net.*;
+import java.io.*;
+public class DaytimeClient {
+public static final int SERVICE_PORT = 8080;
+public static void main(String[] args) {
+if (args.length != 1) {
+System.out.println("Syntax: java DaytimeClient <hostname>");
+return;
+}
+String hostname = args[0];
+try {
+Socket daytime = new Socket(hostname, SERVICE_PORT);
+System.out.println("Connection established");
+daytime.setSoTimeout(5000);
+BufferedReader reader = new BufferedReader(
+new InputStreamReader(daytime.getInputStream(), "UTF-8")
+);
+System.out.println("Server response: " + reader.readLine());
+daytime.close();
+} catch (IOException ioe) {
+System.err.println("Error: " + ioe);
+}
+}
+}
+
+
+SimpleDaytimeServer.java
+
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+public class SimpleDaytimeServer {
+public static void main(String[] args) throws java.io.IOException {
+int port = 8080;
+if (args.length > 0) {
+port = Integer.parseInt(args[0]);
+}
+ServerSocketChannel server = ServerSocketChannel.open();
+server.socket().bind(new InetSocketAddress(port));
+CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+System.out.println("Daytime server started on port " + port);
+while (true) {
+SocketChannel client = server.accept();
+String date = new java.util.Date().toString() + "\r\n";
+ByteBuffer response = encoder.encode(CharBuffer.wrap(date));
+client.write(response);
+client.close();
+}
+}
+}
