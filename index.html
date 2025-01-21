@@ -1,333 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Download Madlab Source </title>
+    <title>Download Madlab Source</title>
     <style>
-      /* General Reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Arial", sans-serif;
-        background: linear-gradient(135deg, #6c63ff, #ab47bc);
-        color: #333;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-      }
-      .container {
-        background: #fff;
-        width: 90%;
-        max-width: 500px;
-        padding: 20px 25px;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        text-align: center;
-      }
-      h1 {
-        font-size: 1.8rem;
-        color: #333;
-        margin-bottom: 20px;
-      }
-      .puzzle,
-      .terms,
-      .download,
-      .result {
-        margin: 20px 0;
-      }
-      .puzzle p {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #555;
-        margin-bottom: 10px;
-      }
-      .options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .options button {
-        background: #eee;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        color: rgb(26, 24, 24);
-        padding: 10px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s;
-      }
-      .options button:hover {
-        background: #ddd;
-      }
-      .options button.selected {
-        background: #6c63ff;
-        color: #fff;
-      }
-      label {
-        font-size: 0.9rem;
-        color: #444;
-      }
-      a {
-        color: #6c63ff;
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      button {
-        background: #6c63ff;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 20px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
-      }
-      button:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-      }
-      button:hover:not(:disabled) {
-        background: #574acf;
-        transform: translateY(-2px);
-      }
-      .download {
-        display: none;
-      }
-      .result {
-        display: none;
-        font-size: 1rem;
-        color: red;
-      }
-      footer {
-        margin-bottom: 20px;
-        font-size: 0.85rem;
-        color: #666;
-      }
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      /* Responsive Design */
-      @media (max-width: 768px) {
+        body {
+            font-family: "Arial", sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
         h1 {
-          font-size: 1.5rem;
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
         }
+
+        .puzzle,
+        .terms,
+        .download {
+            margin: 20px 0;
+        }
+
+        .puzzle p {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .options button {
+            background: #eee;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            color: rgb(26, 24, 24);
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .options button:hover {
+            background: #ddd;
+        }
+
+        .options button.selected {
+            background: #ff7e5f;
+            color: #fff;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        a {
+            color: #6c63ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         button {
-          padding: 10px 15px;
-          font-size: 0.9rem;
+            background: #ff7e5f;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
         }
-      }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background: #ff7e5f;
+            transform: translateY(-2px);
+        }
+
+        .download {
+            display: none;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 300px;
+            animation: popUp 0.3s ease-out;
+        }
+
+        @keyframes popUp {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content img {
+            width: 100px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-content button {
+            background: #ff7e5f;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container">
-      <h1>Download Mad-Lab File</h1>
-      <div class="puzzle">
-        <p id="puzzle-question">Loading puzzle...</p>
-        <div class="options" id="options-container"></div>
-      </div>
-      <div class="terms">
-        <label>
-          <input type="checkbox" id="terms-check" />
-          I have read the
-          <a href="T&C.html" target="_blank">Terms & Conditions</a>.
-        </label>
-      </div>
-      <div>
-        <button id="verify-btn" disabled>Verify and Download</button>
-      </div>
-      <div class="result" id="result-message">
-        Incorrect answer! Please try again.
-        <button onclick="location.reload()">Try Again</button>
-      </div>
-      <div class="download">
-        <p>Great! Your download is ready:</p>
-        <a href="https://srmvec.me/A2LbV9NzXq7Fw5G4T1Jp8QkH0VrZy6KmPo3CwDftMsYj.pdf" download>
-          <button>Download</button>
-        </a>
-      </div>
+        <h1>Download Mad-Lab File</h1>
+        <div class="puzzle">
+            <p id="puzzle-question">Loading puzzle...</p>
+            <div class="options" id="options-container"></div>
+        </div>
+        <div class="terms">
+            <label>
+                <input type="checkbox" id="terms-check" />
+                I have read the
+                <a style="color: #ff7e5f;" href="T&C.html" target="_blank">Terms & Conditions</a>.
+            </label>
+        </div>
+        <div>
+            <button id="verify-btn" disabled>Verify and Download</button>
+        </div>
+        <div class="download">
+            <p>Great! Your download is ready:</p>
+            <a href="https://srmvec.me/A2LbV9NzXq7Fw5G4T1Jp8QkH0VrZy6KmPo3CwDftMsYj.pdf" download>
+                <button>Download</button>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal for Wrong Answer -->
+    <div class="modal" id="error-modal">
+        <div class="modal-content">
+            <img src="Error.png" alt="Sad Emoji">
+            <p>Oops! That's the wrong answer. Try again!</p>
+            <button onclick="location.reload()">Try Again</button>
+        </div>
     </div>
 
     <script>
-      const puzzles = [
-        {
-          question:
-            "Which sorting algorithm has the worst-case time complexity of O(n^2)?",
-          options: ["Merge Sort", "Quick Sort", "Bubble Sort"],
-          answer: "Bubble Sort",
-        },
-        {
-          question:
-            "What is the result of the following Python code? \nprint(len('Hello World'))",
-          options: ["10", "11", "12"],
-          answer: "11",
-        },
-        {
-          question:
-            'In C, what is the output of the following code?\nint a = 5; printf("%d", a++);',
-          options: ["5", "6", "Compiler Error"],
-          answer: "5",
-        },
-        {
-          question:
-            "Which data structure is best suited for implementing a priority queue?",
-          options: ["Array", "Heap", "Linked List"],
-          answer: "Heap",
-        },
-        {
-          question: "What does the 'this' keyword in Java refer to?",
-          options: ["Current object", "Parent class object", "Global object"],
-          answer: "Current object",
-        },
-        {
-          question:
-            "What is the default value of an uninitialized boolean in Java?",
-          options: ["true", "false", "null"],
-          answer: "false",
-        },
-        {
-          question:
-            "Which of these is NOT a principle of Object-Oriented Programming?",
-          options: ["Encapsulation", "Inheritance", "Compilation"],
-          answer: "Compilation",
-        },
-        {
-          question: "What does the command 'git clone' do?",
-          options: [
-            "Creates a new repository",
-            "Creates a local copy of a remote repository",
-            "Merges two branches",
-          ],
-          answer: "Creates a local copy of a remote repository",
-        },
-        {
-          question: "In SQL, which keyword is used to sort the result-set?",
-          options: ["SORT BY", "ORDER BY", "GROUP BY"],
-          answer: "ORDER BY",
-        },
-        {
-          question:
-            "What is the output of the following JavaScript code?\nconsole.log(typeof null);",
-          options: ["object", "null", "undefined"],
-          answer: "object",
-        },
-        {
-          question: "In a relational database, what is a 'foreign key'?",
-          options: [
-            "A unique identifier",
-            "A reference to another table",
-            "A primary key",
-          ],
-          answer: "A reference to another table",
-        },
-        {
-          question:
-            "Which algorithm is used for finding the shortest path in a graph?",
-          options: [
-            "Kruskal's Algorithm",
-            "Dijkstra's Algorithm",
-            "Prim's Algorithm",
-          ],
-          answer: "Dijkstra's Algorithm",
-        },
-        {
-          question: "Which HTTP method is used to update data on the server?",
-          options: ["GET", "POST", "PUT"],
-          answer: "PUT",
-        },
-        {
-          question:
-            'What is the output of the following C code?\nint a = 10; printf("%d", a / 0);',
-          options: ["Undefined Behavior", "0", "Runtime Error"],
-          answer: "Undefined Behavior",
-        },
-        {
-          question: "Which Python data type is immutable?",
-          options: ["List", "Dictionary", "Tuple"],
-          answer: "Tuple",
-        },
-        {
-          question: "Which keyword is used to handle exceptions in Java?",
-          options: ["try-catch", "handle", "catch-throw"],
-          answer: "try-catch",
-        },
-        {
-          question:
-            "In JavaScript, what is the difference between '==' and '==='?",
-          options: [
-            "No difference",
-            "'==' checks type and value",
-            "'===' checks type and value",
-          ],
-          answer: "'===' checks type and value",
-        },
-        {
-          question:
-            "What is the Big-O complexity of searching in a hash table (average case)?",
-          options: ["O(1)", "O(n)", "O(log n)"],
-          answer: "O(1)",
-        },
-        {
-          question: "In C++, what is a 'virtual function' used for?",
-          options: ["Encapsulation", "Polymorphism", "Abstraction"],
-          answer: "Polymorphism",
-        },
-        {
-          question:
-            "Which data structure is typically used in Depth-First Search (DFS)?",
-          options: ["Queue", "Stack", "Priority Queue"],
-          answer: "Stack",
-        },
-      ];
-
-      const puzzleQuestionEl = document.getElementById("puzzle-question");
-      const optionsContainerEl = document.getElementById("options-container");
-      const termsCheckEl = document.getElementById("terms-check");
-      const verifyBtnEl = document.getElementById("verify-btn");
-      const downloadSectionEl = document.querySelector(".download");
-      const resultMessageEl = document.getElementById("result-message");
-
-      // Select a random puzzle on page load
-      const randomPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
-      puzzleQuestionEl.textContent = randomPuzzle.question;
-
-      randomPuzzle.options.forEach((option) => {
-        const button = document.createElement("button");
-        button.textContent = option;
-        button.addEventListener("click", () => {
-          document
-            .querySelectorAll(".options button")
-            .forEach((btn) => btn.classList.remove("selected"));
-          button.classList.add("selected");
-          verifyBtnEl.disabled = !termsCheckEl.checked;
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            alert("Are you trying to steal answer for that question? 🤔");
         });
-        optionsContainerEl.appendChild(button);
-      });
 
-      termsCheckEl.addEventListener("change", () => {
-        verifyBtnEl.disabled = !termsCheckEl.checked;
-      });
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault(); // Prevent the default action
+                alert("Are you trying to steal answer for that question? 🤔");
+            }
+        });
 
-      verifyBtnEl.addEventListener("click", () => {
-        const selectedOption = document.querySelector(
-          ".options button.selected"
-        );
-        if (
-          selectedOption &&
-          selectedOption.textContent === randomPuzzle.answer
-        ) {
-          downloadSectionEl.style.display = "block";
-          verifyBtnEl.style.display = "none";
-          resultMessageEl.style.display = "none";
-        } else {
-          resultMessageEl.style.display = "block";
-        }
-      });
+
+        const puzzles = [
+            {
+                question: "What is Jeevaraj's hometown?",
+                options: ["Bangalore", "Theni", "Hosur"],
+                answer: "Theni",
+            },
+            {
+                question: "Which brand of watch does Jeevaraj wear daily?",
+                options: ["Vanheusan", "Fastrack", "Titan"],
+                answer: "Fastrack",
+            },
+            {
+                question: "What smartphone does Naveen Kumar currently use?",
+                options: ["Motorola Edge 40", "Samsung Galaxy F54", "Samsung Galaxy M52"],
+                answer: "Samsung Galaxy F54",
+            },
+            {
+                question: "Ragunath's phone number starts with...",
+                options: ["6374*****", "8072*****", "9629*****"],
+                answer: "9629*****",
+            },
+            {
+                question: "How many times has Jeevaraj broken his phone display and replaced it?",
+                options: ["0", "1", "2"],
+                answer: "1",
+            },
+            {
+                question: "What smartphone did Ragunath buy recently?",
+                options: ["Moto G85", "Motorola Edge 50 Fusion", "Moto Razr 50"],
+                answer: "Moto G85",
+            },
+            {
+                question: "Which voice assistant is found on Karthick's smartwatch?",
+                options: ["Google", "Alexa", "bixby"],
+                answer: "Alexa",
+            },
+            {
+                question: "Who is Jeevanantham's favorite cricketer?",
+                options: ["Virat Kohli", "AB de Villiers", "MS Dhoni"],
+                answer: "AB de Villiers",
+            },
+            {
+                question: "Which mode of transport does Naveen Kumar prefer mostly?",
+                options: ["By Private Bus", "by Govt Bus", "By Train"],
+                answer: "By Red Bus",
+            },
+            {
+                question: "Guess Nikhil's age.",
+                options: ["21 Years 7 Month", "21 Years 3 Month", "21 Years 5 Month"],
+                answer: "21 Years 7 Month",
+            },
+            {
+                question: "What is Jeevaraj's mother tongue?",
+                options: ["Tamil", "Telugu", "Urdu"],
+                answer: "Tamil",
+            },
+            {
+                question: "What sport does Jayachandran play the most?",
+                options: ["Cricker", "Kabadi", "Badminton"],
+                answer: "Badminton",
+            },
+            {
+                question: "What does Nikhil do most during his free time?",
+                options: ["Watching Movie", "Watching Series", "Watching Anime"],
+                answer: "Watching Anime",
+            },
+            {
+                question: "Which breed does Bolt belong to?",
+                options: ["German Shepherd", "Golden Retriever", "Rottweiler"],
+                answer: "Rottweiler",
+            },
+            {
+                question: "What is Karthick's favorite drink?",
+                options: ["Coffee", "Iced Tea", "Chai"],
+                answer: "Coffee",
+            }
+            // Additional puzzles...
+        ];
+
+        const puzzleQuestionEl = document.getElementById("puzzle-question");
+        const optionsContainerEl = document.getElementById("options-container");
+        const termsCheckEl = document.getElementById("terms-check");
+        const verifyBtnEl = document.getElementById("verify-btn");
+        const downloadSectionEl = document.querySelector(".download");
+        const errorModalEl = document.getElementById("error-modal");
+
+        // Select a random puzzle on page load
+        const randomPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+        puzzleQuestionEl.textContent = randomPuzzle.question;
+
+        randomPuzzle.options.forEach((option) => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.addEventListener("click", () => {
+                document
+                    .querySelectorAll(".options button")
+                    .forEach((btn) => btn.classList.remove("selected"));
+                button.classList.add("selected");
+                verifyBtnEl.disabled = !termsCheckEl.checked;
+            });
+            optionsContainerEl.appendChild(button);
+        });
+
+        termsCheckEl.addEventListener("change", () => {
+            verifyBtnEl.disabled = !termsCheckEl.checked;
+        });
+
+        verifyBtnEl.addEventListener("click", () => {
+            const selectedOption = document.querySelector(".options button.selected");
+            if (selectedOption && selectedOption.textContent === randomPuzzle.answer) {
+                downloadSectionEl.style.display = "block";
+                verifyBtnEl.style.display = "none";
+            } else {
+                errorModalEl.style.display = "flex";
+            }
+        });
     </script>
-  </body>
+</body>
+
 </html>
