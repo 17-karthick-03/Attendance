@@ -1,1 +1,47 @@
-sudo /bin/sh -c "VIAM_API_KEY_ID=36233be2-d55d-4542-881a-7df59006aea2 VIAM_API_KEY=z9f977iqh3rdpqh8xbyx377kje8uk2g6 VIAM_PART_ID=3d6bb5b5-475b-4a04-846b-f3c1d4dd14d1; $(curl -fsSL https://storage.googleapis.com/packages.viam.com/apps/viam-agent/install.sh)"
+import pygame
+import picamera
+import picamera.array
+import numpy as np
+
+# Initialize pygame
+pygame.init()
+
+# Set display dimensions
+WIDTH, HEIGHT = 640, 480
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Live Camera View")
+
+# Initialize the camera
+camera = picamera.PiCamera()
+camera.resolution = (WIDTH, HEIGHT)
+camera.framerate = 30
+
+# Create a numpy array for capturing camera frames
+with picamera.array.PiRGBArray(camera) as stream:
+    running = True
+    try:
+        while running:
+            # Capture a frame
+            camera.capture(stream, format="rgb")
+            frame = stream.array
+
+            # Convert the frame to a pygame surface
+            frame_surface = pygame.surfarray.make_surface(np.rot90(frame))
+
+            # Display the frame on the screen
+            screen.blit(frame_surface, (0, 0))
+            pygame.display.update()
+
+            # Clear the stream for the next frame
+            stream.seek(0)
+            stream.truncate()
+
+            # Handle events
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+    except KeyboardInterrupt:
+        print("Exiting...")
+    finally:
+        camera.close()
+        pygame.quit()
