@@ -1,345 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Download Madlab Source</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Arial", sans-serif;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            background: #fff;
-            width: 90%;
-            max-width: 500px;
-            padding: 20px 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .puzzle,
-        .terms,
-        .download {
-            margin: 20px 0;
-        }
-
-        .puzzle p {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .options button {
-            background: #eee;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            color: rgb(26, 24, 24);
-            padding: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .options button:hover {
-            background: #ddd;
-        }
-
-        .options button.selected {
-            background: #ff7e5f;
-            color: #fff;
-        }
-
-        label {
-            font-size: 0.9rem;
-            color: #444;
-        }
-
-        a {
-            color: #6c63ff;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        button {
-            background: #ff7e5f;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
-        button:hover:not(:disabled) {
-            background: #ff7e5f;
-            transform: translateY(-2px);
-        }
-
-        .download {
-            display: none;
-        }
-
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 300px;
-            animation: popUp 0.3s ease-out;
-        }
-
-        @keyframes popUp {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .modal-content img {
-            width: 100px;
-            border-radius: 30px;
-            margin-bottom: 15px;
-        }
-
-        .modal-content p {
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .modal-content button {
-            background: #ff7e5f;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Download Mad-Lab File</h1>
-        <div class="puzzle">
-            <p id="puzzle-question">Loading puzzle...</p>
-            <div class="options" id="options-container"></div>
-        </div>
-        <div class="terms">
-            <label>
-                <input type="checkbox" id="terms-check" />
-                I have read the
-                <a style="color: #ff7e5f;" href="T&C.html" target="_blank">Terms & Conditions</a>.
-            </label>
-        </div>
-        <div>
-            <button id="verify-btn" disabled>Verify and Download</button>
-        </div>
-        <div class="download">
-            <p>Great! Your download is ready:</p>
-            <a href="https://srmvec.me/A2LbV9NzXq7Fw5G4T1Jp8QkH0VrZy6KmPo3CwDftMsYj.pdf" download>
-                <button>Download</button>
-            </a>
-        </div>
-    </div>
-
-    <!-- Modal for Wrong Answer -->
-    <div class="modal" id="error-modal">
-        <div class="modal-content">
-            <img src="Error.png" alt="Sad Emoji">
-            <p>Oops! That's the wrong answer. Try again!</p>
-            <button onclick="location.reload()">Try Again</button>
-        </div>
-    </div>
-
+    <title>17-karthick-03</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQ02DLBGRX"></script>
     <script>
-        document.addEventListener("contextmenu", (event) => {
-            event.preventDefault();
-            alert("Are you trying to steal answer for that question? 🤔");
-        });
-
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
-                event.preventDefault(); // Prevent the default action
-                alert("Are you trying to steal answer for that question? 🤔");
-            }
-        });
-
-
-        const puzzles = [
-            {
-                question: "What is Jeevaraj's hometown?",
-                options: ["Bangalore", "Theni", "Hosur"],
-                answer: "Theni",
-            },
-            {
-                question: "Which brand of watch does Jeevaraj wear daily?",
-                options: ["Vanheusan", "Fastrack", "Titan"],
-                answer: "Fastrack",
-            },
-            {
-                question: "What smartphone does Naveen Kumar currently use?",
-                options: ["Motorola Edge 40", "Samsung Galaxy F54", "Samsung Galaxy M52"],
-                answer: "Samsung Galaxy F54",
-            },
-            {
-                question: "Ragunath's phone number starts with...",
-                options: ["6374*****", "8072*****", "9629*****"],
-                answer: "9629*****",
-            },
-            {
-                question: "How many times has Jeevaraj broken his phone display and replaced it?",
-                options: ["0", "1", "2"],
-                answer: "1",
-            },
-            {
-                question: "What smartphone did Ragunath buy recently?",
-                options: ["Moto G85", "Motorola Edge 50 Fusion", "Moto Razr 50"],
-                answer: "Moto G85",
-            },
-            {
-                question: "Which voice assistant is found on Karthick's smartwatch?",
-                options: ["Google", "Alexa", "bixby"],
-                answer: "Alexa",
-            },
-            {
-                question: "Who is Jeevanantham's favorite cricketer?",
-                options: ["Virat Kohli", "AB de Villiers", "MS Dhoni"],
-                answer: "AB de Villiers",
-            },
-            {
-                question: "Which mode of transport does Naveen Kumar prefer mostly?",
-                options: ["By Private Bus", "by Govt Bus", "By Train"],
-                answer: "By Red Bus",
-            },
-            {
-                question: "Guess Nikhil's age.",
-                options: ["21 Years 7 Month", "21 Years 3 Month", "21 Years 5 Month"],
-                answer: "21 Years 7 Month",
-            },
-            {
-                question: "What is Jeevaraj's mother tongue?",
-                options: ["Tamil", "Telugu", "Urdu"],
-                answer: "Tamil",
-            },
-            {
-                question: "What sport does Jayachandran play the most?",
-                options: ["Cricker", "Kabadi", "Badminton"],
-                answer: "Badminton",
-            },
-            {
-                question: "What does Nikhil do most during his free time?",
-                options: ["Watching Movie", "Watching Series", "Watching Anime"],
-                answer: "Watching Anime",
-            },
-            {
-                question: "Which breed does Bolt belong to?",
-                options: ["German Shepherd", "Golden Retriever", "Rottweiler"],
-                answer: "Rottweiler",
-            },
-            {
-                question: "What is Karthick's favorite drink?",
-                options: ["Coffee", "Iced Tea", "Chai"],
-                answer: "Coffee",
-            }
-            // Additional puzzles...
-        ];
-
-        const puzzleQuestionEl = document.getElementById("puzzle-question");
-        const optionsContainerEl = document.getElementById("options-container");
-        const termsCheckEl = document.getElementById("terms-check");
-        const verifyBtnEl = document.getElementById("verify-btn");
-        const downloadSectionEl = document.querySelector(".download");
-        const errorModalEl = document.getElementById("error-modal");
-
-        // Select a random puzzle on page load
-        const randomPuzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
-        puzzleQuestionEl.textContent = randomPuzzle.question;
-
-        randomPuzzle.options.forEach((option) => {
-            const button = document.createElement("button");
-            button.textContent = option;
-            button.addEventListener("click", () => {
-                document
-                    .querySelectorAll(".options button")
-                    .forEach((btn) => btn.classList.remove("selected"));
-                button.classList.add("selected");
-                verifyBtnEl.disabled = !termsCheckEl.checked;
-            });
-            optionsContainerEl.appendChild(button);
-        });
-
-        termsCheckEl.addEventListener("change", () => {
-            verifyBtnEl.disabled = !termsCheckEl.checked;
-        });
-
-        verifyBtnEl.addEventListener("click", () => {
-            const selectedOption = document.querySelector(".options button.selected");
-            if (selectedOption && selectedOption.textContent === randomPuzzle.answer) {
-                downloadSectionEl.style.display = "block";
-                verifyBtnEl.style.display = "none";
-            } else {
-                errorModalEl.style.display = "flex";
-            }
-        });
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-YQ02DLBGRX');
     </script>
-</body>
+    <link
+      rel="icon"
+      href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRmoocE_3kDllUwV5siGiUdRjTQHul2D2RYPijgWLcpKmndsj-38NyzUmKPfQiHcOG_M3QPwysNrEcl0NtzBXV0-a6U0GHAEY29VBTkfMWDjLPvqc6qLolRHHcf7tJic2COHosVsvT4n5BlfqM9XdhsM92mbBSkd83znRTSICxJHgAH1N3bLA4uGjG-G4/s320/ICON.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      if (window.innerWidth >= 768) {
+        window.location.href = "404.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="image-wrapper">
+      <a href="https://buymeacoffee.com/17_bolt_03" class="image-link">
+        <img src="admin.jpg" alt="Admin" id="adminImage" />
+      </a>
+    </div>
+    <div class="background-blur" id="backgroundBlur"></div>
+    <div class="container" id="formContainer">
+      <h1>Enter Your Credentials</h1>
+      <form id="dataForm">
+        <div class="input-group">
+          <label for="regNo">Registration Number</label>
+          <input type="text" id="regNo" name="regNo" required />
+        </div>
+        <div class="input-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <button
+          style="background: linear-gradient(to right, #ff6f61, #6e8b9e)"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+      <br>
+      <p>Click <a href="calendar.html" style="text-decoration: none;">here</a> to see the Academic Calendar</p>
+    </div>
+    <div id="attendanceContainer" class="attendance-container"></div>
+    <div class="popup-container" id="popupContainer">
+      <div class="popup-header">
+        <span id="closePopup" onclick="closePopup()">x</span>
+      </div>
+      <div class="popup-content" id="popupContent">
+        <p>
+          This attendance percentage was actually correct according to the
+          attendance sheet that I handle every day with subject staff. However,
+          in the master attendance, the possibility is that you should get an
+          attendance percentage of more than 0.5 to 1% compared to this.
+        </p>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Auto-fill if data exists in local storage
+        const regNo = localStorage.getItem('regNo');
+        const dob = localStorage.getItem('dob');
+        if (regNo) document.getElementById('regNo').value = regNo;
+        if (dob) document.getElementById('dob').value = dob;
 
+        // Save data on form submission
+        document.getElementById('dataForm').addEventListener('submit', function (e) {
+          e.preventDefault(); // Prevent form from submitting
+          
+          const regNoInput = document.getElementById('regNo').value;
+          const dobInput = document.getElementById('dob').value;
+          
+          // Save values to local storage
+          localStorage.setItem('regNo', regNoInput);
+          localStorage.setItem('dob', dobInput);
+          
+          //alert('Credentials saved locally for future use!');
+          // Continue with form submission if needed
+        });
+      });
+    </script>
+    <script src="scripts.js"></script>
+  </body>
 </html>
